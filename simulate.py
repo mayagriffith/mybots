@@ -10,8 +10,6 @@ pi = math.pi
 
 runs = 100
 
-
-
 physicsClient = p.connect(p.GUI)
 
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
@@ -42,11 +40,6 @@ for iter in range(0,runs):
     frontLegSensorValues[iter] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
     pyrosim.Set_Motor_For_Joint(bodyIndex = robotId, jointName = b'Torso_BackLeg', controlMode = p.POSITION_CONTROL, targetPosition = scaled_value, maxForce = 500)
     pyrosim.Set_Motor_For_Joint(bodyIndex = robotId, jointName = b'Torso_FrontLeg', controlMode = p.POSITION_CONTROL, targetPosition = scaled_value, maxForce = 500)
-
-
-
-
-
 
 
 # print(backLegSensorValues)
