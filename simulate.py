@@ -31,6 +31,18 @@ frontLegSensorValues = numpy.zeros(runs)
 numsArray = 2*pi*(numpy.arange(runs) / runs)
 targetAngles = (pi/4)*numpy.sin(numsArray)
 
+amplitudeFront = pi/4
+frequencyFront = 3
+phaseOffsetFront = 0
+
+amplitudeBack = pi/4
+frequencyBack = 3
+phaseOffsetBack = pi/4
+
+
+targetAnglesFront = amplitudeFront*numpy.sin(frequencyFront * numsArray + phaseOffsetFront)
+targetAnglesBack = amplitudeBack*numpy.sin(frequencyBack * numsArray + phaseOffsetBack)
+
 
 for iter in range(0,runs):
     scaled_value = -pi/2 + (random.random() * (pi/2 - -pi/2))
@@ -38,12 +50,8 @@ for iter in range(0,runs):
     time.sleep(1/60)
     backLegSensorValues[iter] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
     frontLegSensorValues[iter] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
-    pyrosim.Set_Motor_For_Joint(bodyIndex = robotId, jointName = b'Torso_BackLeg', controlMode = p.POSITION_CONTROL, targetPosition = scaled_value, maxForce = 500)
-    pyrosim.Set_Motor_For_Joint(bodyIndex = robotId, jointName = b'Torso_FrontLeg', controlMode = p.POSITION_CONTROL, targetPosition = scaled_value, maxForce = 500)
-
-
-# print(backLegSensorValues)
-
+    pyrosim.Set_Motor_For_Joint(bodyIndex = robotId, jointName = b'Torso_BackLeg', controlMode = p.POSITION_CONTROL, targetPosition = targetAnglesFront[iter], maxForce = 500)
+    pyrosim.Set_Motor_For_Joint(bodyIndex = robotId, jointName = b'Torso_FrontLeg', controlMode = p.POSITION_CONTROL, targetPosition = targetAnglesBack[iter], maxForce = 500)
 
 
 p.disconnect()
@@ -53,4 +61,11 @@ with open('data/frontsensorvals.npy', 'wb') as f:
 
 with open('data/backsensorvals.npy', 'wb') as f:
     numpy.save(f, backLegSensorValues)
+
+with open('data/arrayDataF.npy', 'wb') as f:
+    numpy.save(f, targetAnglesFront)
+
+with open('data/arrayDataB.npy', 'wb') as f:
+    numpy.save(f, targetAnglesBack)
+
 
