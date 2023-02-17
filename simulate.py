@@ -8,7 +8,7 @@ import math
 
 pi = math.pi
 
-runs = 100
+runs = 500
 
 physicsClient = p.connect(p.GUI)
 
@@ -29,14 +29,14 @@ backLegSensorValues = numpy.zeros(runs)
 frontLegSensorValues = numpy.zeros(runs)
 
 numsArray = 2*pi*(numpy.arange(runs) / runs)
-targetAngles = (pi/4)*numpy.sin(numsArray)
+# targetAngles = (pi/4)*numpy.sin(numsArray)
 
 amplitudeFront = pi/4
-frequencyFront = 3
+frequencyFront = 8
 phaseOffsetFront = 0
 
 amplitudeBack = pi/4
-frequencyBack = 3
+frequencyBack = 8
 phaseOffsetBack = pi/4
 
 
