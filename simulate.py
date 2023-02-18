@@ -3,6 +3,7 @@ import time
 import pybullet_data
 import pyrosim.pyrosim as pyrosim
 import numpy
+<<<<<<< HEAD
 import random
 import math
 import constants as c
@@ -14,13 +15,22 @@ from simulation import SIMULATION
 
 simulation = SIMULATION()
 simulation.Run()
+=======
+import constants as c
+>>>>>>> 9751369 (deleting anyways)
 
 
 # physicsClient = p.connect(p.GUI)
 
 # p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
+<<<<<<< HEAD
 # p.setGravity(0,0, c.gravity)
+=======
+
+
+p.setGravity(0,0, c.gravity)
+>>>>>>> 9751369 (deleting anyways)
 
 # p.loadSDF("world.sdf")
 
