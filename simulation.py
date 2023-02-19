@@ -14,7 +14,7 @@ class SIMULATION:
         p.setGravity(0,0,c.gravity) 
         self.world = WORLD()
         self.robot = ROBOT()
-
+   
 
     def __del__(self):
         p.disconnect()
@@ -23,10 +23,6 @@ class SIMULATION:
         for iter in range(0,c.runs):
             # scaled_value = -c.pi/2 + (random.random() * (c.pi/2 - -c.pi/2))
             p.stepSimulation()
-            # time.sleep(1/60)
-            # backLegSensorValues[iter] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
-            # frontLegSensorValues[iter] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
-            # pyrosim.Set_Motor_For_Joint(bodyIndex = robotId, jointName = b'Torso_BackLeg', controlMode = p.POSITION_CONTROL, targetPosition = targetAnglesFront[iter], maxForce = 500)
-            # pyrosim.Set_Motor_For_Joint(bodyIndex = robotId, jointName = b'Torso_FrontLeg', controlMode = p.POSITION_CONTROL, targetPosition = targetAnglesBack[iter], maxForce = 500)
-            print(iter)
+            self.robot.Sense(iter)
+            self.robot.Act(iter)
             time.sleep(1/60)

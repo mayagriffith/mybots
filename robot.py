@@ -5,12 +5,11 @@ from motor import MOTOR
 
 class ROBOT:
     def __init__(self):
-        self.motors = {}
         #loading robot
         self.robotId = p.loadURDF("body.urdf")
         pyrosim.Prepare_To_Simulate(self.robotId)
-
         self.Prepare_To_Sense()
+        self.Prepare_To_Act()
 
     
     def Prepare_To_Sense(self):
@@ -22,3 +21,13 @@ class ROBOT:
     def Sense(self, t):
         for i in self.sensors:
             self.sensors[i].Get_Value(i, t)
+    
+    def Prepare_To_Act(self):
+        self.motors = {}
+        for jointName in pyrosim.jointNamesToIndices:
+            self.motors[jointName] = MOTOR(jointName)
+
+    def Act(self,t):
+            for i in self.motors:
+                self.motors[i].Set_Value(self.robotId, i, t)
+            
