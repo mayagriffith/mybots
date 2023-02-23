@@ -24,5 +24,6 @@ class SIMULATION:
             # scaled_value = -c.pi/2 + (random.random() * (c.pi/2 - -c.pi/2))
             p.stepSimulation()
             self.robot.Sense(iter)
+            self.robot.Think()
             self.robot.Act(iter)
             time.sleep(1/60)
