@@ -44,8 +44,7 @@ class ROBOT:
                     # jointName = "b'"+jointName+"'"
                     # self.motors[jointName]
                     self.motors[jointName].Set_Value(self.robotId, desiredAngle)
-
-                    print("done")
+                    print(neuronName, jointName, desiredAngle)
 
 
 
