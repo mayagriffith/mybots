@@ -13,4 +13,4 @@ maxforce=500
 amplitude = pi/4
 frequency = 8
 phaseOffset = 0
-numberOfGenerations = 2
+numberOfGenerations = 10
