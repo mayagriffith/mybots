@@ -41,13 +41,8 @@ class ROBOT:
                     # print(jointName)
                     # print(self.motors[jointName])
                     jointName = str(jointName)
-                    # jointName = "b'"+jointName+"'"
-                    # self.motors[jointName]
                     self.motors[jointName].Set_Value(self.robotId, desiredAngle)
                     print(neuronName, jointName, desiredAngle)
-
-
-
             # for i in self.motors:
             #     self.motors[i].Set_Value(self.robotId, i, t)
             
@@ -62,3 +57,4 @@ class ROBOT:
         xCoordindateOfLinkZero = positionOfLinkZero[0]
         file = open("fitness.txt", "w")
         file.write(str(xCoordindateOfLinkZero))
+        file.close()
