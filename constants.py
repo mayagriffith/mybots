@@ -15,3 +15,4 @@ frequency = 8
 phaseOffset = 0
 numberOfGenerations = 10
 sleep = 1/60
+populationSize = 2
