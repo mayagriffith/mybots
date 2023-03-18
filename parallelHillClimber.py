@@ -45,7 +45,7 @@ class PARALLEL_HILL_CLIMBER:
 
     
     def Print(self):
-        print("fitness coordinates for this run:")
+        print("")
         for i in self.parents:
             print(self.parents[i].fitness, self.children[i].fitness)
         print("")

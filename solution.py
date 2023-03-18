@@ -36,6 +36,7 @@ class SOLUTION:
 
         fitnessFile = open("fitness" + str(self.myID) + ".txt", "r")
         self.fitness = float(fitnessFile.readline())
+        print(self.fitness)
         fitnessFile.close()
         os.system("rm fitness" + str(self.myID) + ".txt")
 
