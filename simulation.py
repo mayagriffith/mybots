@@ -8,7 +8,7 @@ import time
 
 
 class SIMULATION:
-    def __init__(self, directOrGUI):
+    def __init__(self, directOrGUI, solutionID):
         directOrGUI= str(directOrGUI)
         if directOrGUI=="DIRECT":
             self.physicsClient = p.connect(p.DIRECT)
@@ -19,7 +19,9 @@ class SIMULATION:
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(0,0,c.gravity) 
         self.world = WORLD()
-        self.robot = ROBOT()
+        self.solutionID = solutionID
+        self.robot = ROBOT(self.solutionID)
+        self.directORGUI = directOrGUI
    
 
     def __del__(self):
@@ -35,4 +37,4 @@ class SIMULATION:
             time.sleep(c.sleep)
 
     def Get_Fitness(self):
-        self.robot.Get_Fitness()
+        self.robot.Get_Fitness(self.solutionID)
