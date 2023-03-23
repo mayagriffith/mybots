@@ -1,5 +1,5 @@
 pybullet build time: Jan 18 2023 12:23:40
-2023-03-23 14:38:14.361 Python[18801:643649] ApplePersistenceIgnoreState: Existing state will not be touched. New state will be written to (null)
+2023-03-23 14:56:42.139 Python[19928:662169] ApplePersistenceIgnoreState: Existing state will not be touched. New state will be written to (null)
 Version = 4.1 INTEL-14.7.8
 Vendor = Intel Inc.
 Renderer = Intel(R) Iris(TM) Plus Graphics 645
@@ -11,27 +11,11 @@ MotionThreadFunc thread started
 b3Printf: b3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
 
 b3Printf: expected a world element, continuing without it.
-Traceback (most recent call last):
-  File "/Users/mayagriffith/Desktop/CS206/simulate.py", line 19, in <module>
-    simulation.Run()
-  File "/Users/mayagriffith/Desktop/CS206/simulation.py", line 34, in Run
-    self.robot.Sense(iter)
-  File "/Users/mayagriffith/Desktop/CS206/robot.py", line 31, in Sense
-    sensor.Get_Value(linkName, t)
-  File "/Users/mayagriffith/Desktop/CS206/sensor.py", line 11, in Get_Value
-    self.values[t] = pyrosim.Get_Touch_Sensor_Value_For_Link(linkName)
-  File "/Users/mayagriffith/Desktop/CS206/pyrosim/pyrosim.py", line 53, in Get_Touch_Sensor_Value_For_Link
-    for pt in pts:
-TypeError: 'NoneType' object is not iterable
-Exception ignored in: <function SIMULATION.__del__ at 0x1152d1ab0>
-Traceback (most recent call last):
-  File "/Users/mayagriffith/Desktop/CS206/simulation.py", line 28, in __del__
-pybullet.error: Not connected to physics server.
 numActiveThreads = 0
 stopping threads
-Thread with taskId 0 exiting
-Thread TERMINATED
 destroy semaphore
 semaphore destroyed
+Thread with taskId 0 exiting
+Thread TERMINATED
 destroy main semaphore
 main semaphore destroyed
