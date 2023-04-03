@@ -13,8 +13,8 @@ height = 1
 class SOLUTION:
     def __init__(self, nextAvailableID):
         self.myID = nextAvailableID
-        self.weights = np.random.random((c.numSensorNeurons,c.numHiddenNeurons))
-        self.weights = self.weights* 2 - 1
+        self.sensorToHidden = np.random.random((c.numSensorNeurons,c.numHiddenNeurons))
+        self.sensorToHidden = self.sensorToHidden* 2 - 1
         self.hiddenToMotor = np.random.random((c.numHiddenNeurons,c.numMotorNeurons))
         self.hiddenToMotor = self.hiddenToMotor * 2 - 1
 
@@ -100,7 +100,7 @@ class SOLUTION:
         
         for currentRow in range(c.numSensorNeurons):
             for currentColumn in range(c.numHiddenNeurons):
-                pyrosim.Send_Synapse( sourceNeuronName = currentRow, targetNeuronName = currentColumn+c.numSensorNeurons+c.numMotorNeurons , weight = self.weights[currentRow][currentColumn])
+                pyrosim.Send_Synapse( sourceNeuronName = currentRow, targetNeuronName = currentColumn+c.numSensorNeurons+c.numMotorNeurons , weight = self.sensorToHidden[currentRow][currentColumn])
         
         for currentRow in range(c.numHiddenNeurons):
             for currentColumn in range(c.numMotorNeurons):
@@ -110,7 +110,7 @@ class SOLUTION:
 
 
     def Mutate(self):
-        self.weights[random.randint(0,c.numSensorNeurons-1),random.randint(0,c.numHiddenNeurons-1)] = random.random()*2-1
+        self.sensorToHidden[random.randint(0,c.numSensorNeurons-1),random.randint(0,c.numHiddenNeurons-1)] = random.random()*2-1
         self.hiddenToMotor[random.randint(0,c.numHiddenNeurons-1),random.randint(0,c.numMotorNeurons-1)] = random.random()*2-1
         
 
