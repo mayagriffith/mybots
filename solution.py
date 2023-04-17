@@ -14,7 +14,9 @@ class SOLUTION:
     def __init__(self, nextAvailableID):
         self.myID = nextAvailableID
         self.sensorToHidden = np.random.random((c.numSensorNeurons,c.numHiddenNeurons))
-        self.sensorToHidden = self.sensorToHidden* 2 - 1
+        self.sensorToHidden = self.sensorToHidden * 2 - 1
+        self.hiddenToHidden = np.random.random((c.numHiddenNeurons,c.numHiddenNeurons))
+        self.hiddenToHidden = self.hiddenToHidden * 2 - 1
         self.hiddenToMotor = np.random.random((c.numHiddenNeurons,c.numMotorNeurons))
         self.hiddenToMotor = self.hiddenToMotor * 2 - 1
 
@@ -101,6 +103,13 @@ class SOLUTION:
         for currentRow in range(c.numSensorNeurons):
             for currentColumn in range(c.numHiddenNeurons):
                 pyrosim.Send_Synapse( sourceNeuronName = currentRow, targetNeuronName = currentColumn+c.numSensorNeurons+c.numMotorNeurons , weight = self.sensorToHidden[currentRow][currentColumn])
+        
+        #self-connecting neurons
+        for currentRow in range(c.numHiddenNeurons):
+            for currentColumn in range(c.numHiddenNeurons):
+                pyrosim.Send_Synapse(sourceNeuronName=currentRow+c.numSensorNeurons+c.numMotorNeurons, 
+                             targetNeuronName=currentColumn+c.numSensorNeurons+c.numMotorNeurons, weight=self.hiddenToHidden[currentRow][currentColumn])
+                
         
         for currentRow in range(c.numHiddenNeurons):
             for currentColumn in range(c.numMotorNeurons):

@@ -10,7 +10,7 @@ height = 1
 
 def Create_World():
     pyrosim.Start_SDF("world.sdf")
-    pyrosim.Send_Cube(name="Box", pos=[-2,2,.5] , size=[length,width,height])
+    pyrosim.Send_Cube(name="Box", pos=[-4,2,.5] , size=[length,width,height])
     pyrosim.End()
 
 
