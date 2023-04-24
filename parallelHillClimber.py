@@ -2,6 +2,8 @@ from solution import SOLUTION
 import constants as c
 import copy
 import os
+import numpy as np
+
 
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
@@ -15,18 +17,22 @@ class PARALLEL_HILL_CLIMBER:
             thisSolution = SOLUTION(self.nextAvailableID)
             self.nextAvailableID+=1
             self.parents[i] = thisSolution
+        self.fitnessMatrix = np.zeros(shape=(c.populationSize, c.numberOfGenerations))
+
 
     def Evolve(self):
         self.Evaluate(self.parents)
         for currentGeneration in range(c.numberOfGenerations):
-            self.Evolve_For_One_Generation()
-  
-    def Evolve_For_One_Generation(self):
+            self.Evolve_For_One_Generation(currentGeneration)
+        
+       
+    def Evolve_For_One_Generation(self, currentGeneration):
         self.Spawn()
         self.Mutate()
         self.Evaluate(self.children)
         self.Print()
         self.Select()
+        self.Store_Fitness(currentGeneration)
 
     def Spawn(self):
         self.children = {}
@@ -42,6 +48,13 @@ class PARALLEL_HILL_CLIMBER:
        for i in self.parents:
             if (self.parents[i].fitness > self.children[i].fitness):
                 self.parents[i] = self.children[i]
+
+    def Store_Fitness(self, currentGeneration):
+        population = 0
+        for key in self.parents:
+            sol = self.parents[key]
+            self.fitnessMatrix[population][currentGeneration] = sol.fitness
+            population += 1
 
     
     def Print(self):
@@ -59,6 +72,15 @@ class PARALLEL_HILL_CLIMBER:
                 bestFitnessID = i+1        
         
         self.parents[bestFitnessID].Start_Simulation("GUI")
+
+        if(c.numHiddenNeurons == 0):
+            currentlyTesting = "A" 
+        elif(c.numHiddenNeurons > 0):
+            currentlyTesting = "B"
+        np.savetxt("matrix" + currentlyTesting + ".csv", self.fitnessMatrix, delimiter =', ')
+        np.save("matrix" + currentlyTesting + ".npy", self.fitnessMatrix)
+  
+  
 
     def Evaluate(self, solutions):
         for i in solutions:

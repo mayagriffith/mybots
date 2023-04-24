@@ -40,7 +40,7 @@ class SOLUTION:
 
     def Create_World(self):
         pyrosim.Start_SDF("world.sdf")
-        pyrosim.Send_Cube(name="Box", pos=[-2,2,.5] , size=[length,width,height])
+        pyrosim.Send_Cube(name="Box", pos=[-2,4,.5] , size=[length,width,height])
         pyrosim.End()
 
     def Create_Body(self):
@@ -104,11 +104,11 @@ class SOLUTION:
             for currentColumn in range(c.numHiddenNeurons):
                 pyrosim.Send_Synapse( sourceNeuronName = currentRow, targetNeuronName = currentColumn+c.numSensorNeurons+c.numMotorNeurons , weight = self.sensorToHidden[currentRow][currentColumn])
         
-        #self-connecting neurons
+        #self-connecting neurons, creating connections between all hidden neurons and itself
         for currentRow in range(c.numHiddenNeurons):
-            for currentColumn in range(c.numHiddenNeurons):
-                pyrosim.Send_Synapse(sourceNeuronName=currentRow+c.numSensorNeurons+c.numMotorNeurons, 
-                             targetNeuronName=currentColumn+c.numSensorNeurons+c.numMotorNeurons, weight=self.hiddenToHidden[currentRow][currentColumn])
+            for currentColumn in range(currentRow, c.numHiddenNeurons):
+                pyrosim.Send_Synapse(sourceNeuronName=currentRow+c.numSensorNeurons, 
+                             targetNeuronName=currentColumn+c.numSensorNeurons, weight=self.hiddenToHidden[currentRow][currentColumn])
                 
         
         for currentRow in range(c.numHiddenNeurons):
@@ -120,6 +120,7 @@ class SOLUTION:
 
     def Mutate(self):
         self.sensorToHidden[random.randint(0,c.numSensorNeurons-1),random.randint(0,c.numHiddenNeurons-1)] = random.random()*2-1
+        self.hiddenToHidden[random.randint(0,c.numHiddenNeurons-1),random.randint(0,c.numHiddenNeurons-1)] = random.random()*2-1
         self.hiddenToMotor[random.randint(0,c.numHiddenNeurons-1),random.randint(0,c.numMotorNeurons-1)] = random.random()*2-1
         
 
