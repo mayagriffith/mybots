@@ -6,11 +6,12 @@ import numpy as np
 
 
 class PARALLEL_HILL_CLIMBER:
-    def __init__(self):
+    def __init__(self, trial):
 
         os.system("rm brain*.nndf")
         os.system("rm fitness*.txt")
 
+        self.trial = trial
         self.parents = {}
         self.nextAvailableID = 0
         for i in range(0, c.populationSize):
@@ -77,8 +78,8 @@ class PARALLEL_HILL_CLIMBER:
             currentlyTesting = "A" 
         elif(c.numHiddenNeurons > 0):
             currentlyTesting = "B"
-        np.savetxt("matrix" + currentlyTesting + ".csv", self.fitnessMatrix, delimiter =', ')
-        np.save("matrix" + currentlyTesting + ".npy", self.fitnessMatrix)
+        np.savetxt("matrix" + currentlyTesting + str(self.trial) + ".csv", self.fitnessMatrix, delimiter =', ')
+        np.save("matrix" + currentlyTesting + str(self.trial) + ".npy", self.fitnessMatrix)
   
   
 
